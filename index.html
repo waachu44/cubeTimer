@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+    <head>
+        <link rel="stylesheet" href="style.css" type="text/css">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- <link rel="icon" href="favicon.ico" type="image/x-icon" /> -->
+        <title>Stronka</title>
+    </head>
+    <body onload="scrambleRubiksCube()">
+        <div id="wrapper">
+            <header>
+                <h1>SCRAMBLE</h1>
+            </header>
+            <nav>
+                <a class="best">Best</a><a class="worth">Worst</a><a
+                class="counter">Counter</a><a class="avg">Avg</a><a
+                class="avg12">Avg12</a>
+            </nav>
+            <main>
+                    <!-- <a href="#" class="button" onClick="stopwatch.start();">Start</a>
+                    <a href="#" class="button" onClick="stopwatch.lap();">Lap</a>
+                    <a href="#" class="button" onClick="stopwatch.stop();">Stop</a>
+                    <a href="#" class="button" onClick="stopwatch.restart();">Restart</a>
+                    <a href="#" class="button" onClick="stopwatch.clear();">Clear Laps</a> -->
+                <div class="stopwatch"></div>
+                <div class="stopwatchButton">
+                    <button type="button" class="button" data-state="start">GO!
+
+                    </button>
+                </div>
+            </main>
+            <footer>
+                    <ol reversed>
+                    </ol>
+            </footer>
+        </div>
+        <script src="skrypt.js"></script>
+    </body>
+</html>
