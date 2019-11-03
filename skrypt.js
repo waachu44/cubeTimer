@@ -23,7 +23,6 @@ class Stopwatch {
         let msg = document.querySelector('h1').textContent;
         newLi.innerHTML = this.format(times); //+'&nbsp &nbsp &nbsp'+msg;
         let list = document.querySelector('ol');
-        list.appendChild(newLi);
         list.insertBefore(newLi, list.firstChild);
     }
     stop() {
@@ -196,11 +195,27 @@ let stopwatch = new Stopwatch(
     }
 
     var bestOl = document.querySelector('ol');
-    bestOl.addEventListener('DOMNodeInserted', bestScore, false);
+    bestOl.addEventListener('DOMNodeInserted', function(){
+        bestScore();
+        worstScore();
+        counterScore();
+       // avgScore();
+    }, false);
+    let arrayScore = [];
+    
     function bestScore(){
+        var timeToArray = stopwatch.format(stopwatch.times);
+        arrayScore.push(timeToArray);
+        arrayScore.sort();
         var best = document.querySelector('a.best');
-        var valueLi = document.querySelectorAll('li');
-        var minValue = Math.min(valueLi);
-        best.textContent = minValue;
-        //best.innerText = stopwatch.format(stopwatch.times);
+        best.innerText = arrayScore[0];
+    }
+    function worstScore(){
+        var worst = document.querySelector('a.worst');
+        worst.innerText = arrayScore[arrayScore.length-1];
+    }
+    function counterScore(){
+        var counterLength = arrayScore.length;
+        var counter = document.querySelector('a.counter');
+        counter.innerText = counterLength;
     }
