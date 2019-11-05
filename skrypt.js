@@ -209,16 +209,17 @@ let stopwatch = new Stopwatch(
         arrayScore.push(timeToArray);
         arrayScore.sort();
         var best = document.querySelector('a.best');
-        best.innerText = arrayScore[0];
+        best.innerText = 'Best: '+arrayScore[0];
+        
     }
     function worstScore(){
         var worst = document.querySelector('a.worst');
-        worst.innerText = arrayScore[arrayScore.length-1];
+        worst.innerText = 'Worst: '+arrayScore[arrayScore.length-1];
     }
     function counterScore(){
         var counterLength = arrayScore.length;
         var counter = document.querySelector('a.counter');
-        counter.innerText = counterLength;
+        counter.innerText = 'Counter: '+counterLength;
     }
     function avgScore(){
         var timeString = stopwatch.format(stopwatch.times).split(':');
@@ -245,5 +246,5 @@ let stopwatch = new Stopwatch(
 
         var arrayScoreAvgEnd = arrayScoreAvg.reverse().join('');
         var avg = document.querySelector('a.avg');
-        avg.innerText = arrayScoreAvgEnd;
+        avg.innerText = 'Average: '+arrayScoreAvgEnd;
     }
