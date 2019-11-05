@@ -21,7 +21,7 @@ class Stopwatch {
         let times = this.times;
         let newLi = document.createElement('li');
         let msg = document.querySelector('h1').textContent;
-        newLi.innerHTML = this.format(times); //+'&nbsp &nbsp &nbsp'+msg;
+        newLi.innerHTML = this.format(times)+'&nbsp &nbsp &nbsp'+msg;
         let list = document.querySelector('ol');
         list.insertBefore(newLi, list.firstChild);
     }
@@ -199,10 +199,11 @@ let stopwatch = new Stopwatch(
         bestScore();
         worstScore();
         counterScore();
-       // avgScore();
+        avgScore();
     }, false);
     let arrayScore = [];
-    
+    let arrayScoreAvg = [0, 0, 0, 0, 0, 0, 0];
+    var sum = 0;
     function bestScore(){
         var timeToArray = stopwatch.format(stopwatch.times);
         arrayScore.push(timeToArray);
@@ -218,4 +219,31 @@ let stopwatch = new Stopwatch(
         var counterLength = arrayScore.length;
         var counter = document.querySelector('a.counter');
         counter.innerText = counterLength;
+    }
+    function avgScore(){
+        var timeString = stopwatch.format(stopwatch.times).split(':');
+        let oneTime = timeString[0];
+        let twoTime = timeString[1];
+        let threeTime = timeString[2];
+        var timeNumber = oneTime + twoTime + threeTime;
+        sum = sum + parseInt(timeNumber);
+        //let avgSum = [...Math.ceil(sum / arrayScore.length)];
+        let avgSum = (Math.ceil(sum / arrayScore.length)).toString().split("").reverse();
+        for(i=avgSum.length; i<7; i++){
+            avgSum[i] = 0;
+        }
+        var colonSum = ':';
+        
+        arrayScoreAvg[5] = colonSum;
+        arrayScoreAvg[2] = colonSum;
+        arrayScoreAvg[0] = avgSum[0];
+        arrayScoreAvg[1] = avgSum[1];
+        arrayScoreAvg[3] = avgSum[2];
+        arrayScoreAvg[4] = avgSum[3];
+        arrayScoreAvg[6] = avgSum[4];
+        arrayScoreAvg[7] = avgSum[5];
+
+        var arrayScoreAvgEnd = arrayScoreAvg.reverse().join('');
+        var avg = document.querySelector('a.avg');
+        avg.innerText = arrayScoreAvgEnd;
     }
