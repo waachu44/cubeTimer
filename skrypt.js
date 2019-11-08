@@ -21,9 +21,9 @@ class Stopwatch {
         let times = this.times;
         let newLi = document.createElement('li');
         let msg = document.querySelector('h1').textContent;
-        newLi.innerHTML = this.format(times); //+'&nbsp &nbsp &nbsp'+msg;
+        let timesAfterFormat = this.format(times);
+        newLi.innerHTML = timesAfterFormat; //+'&nbsp &nbsp &nbsp'+msg;
         let list = document.querySelector('ol');
-        list.appendChild(newLi);
         list.insertBefore(newLi, list.firstChild);
     }
     stop() {
@@ -91,7 +91,6 @@ function clearChildren(node) {
 let stopwatch = new Stopwatch(
     document.querySelector('.stopwatch'),
     document.querySelector('.results'));
-    
     // var przycisk = document.querySelector('.button');
     // przycisk.addEventListener('keydown', function(event){
     //     switch (event.keyCode){
@@ -194,13 +193,28 @@ let stopwatch = new Stopwatch(
         }
         document.querySelector('h1').textContent = msg;
     }
-
     var bestOl = document.querySelector('ol');
     bestOl.addEventListener('DOMNodeInserted', bestScore, false);
+    let arrayScore = [];
     function bestScore(){
         var best = document.querySelector('a.best');
-        var valueLi = document.querySelectorAll('li');
-        var minValue = Math.min(valueLi);
-        best.textContent = minValue;
-        //best.innerText = stopwatch.format(stopwatch.times);
+        var timeToString = stopwatch.format(stopwatch.times).split(':');
+        var timeString = timeToString.join('');
+        arrayScore.push(timeString);
+        let i = arrayScore.indexOf(Math.min(...arrayScore));
+        console.log(i);
+        
+        
+        
+        
+        
+        // var minValue = Math.min.apply(null, arrayScore);
+        // console.log(minValue)
+        // minValue = minValue.toString();
+        // var oneSubstring = minValue.substring(0,1);
+        // var twoSubstring = minValue.substring(2,3);
+        // var threeSubstring = minValue.substring(4,5);
+        // var valueSubstring = oneSubstring+':'+twoSubstring+':'+threeSubstring;
+        // best.innerText = valueSubstring;
+        // console.log(arrayScore);
     }
