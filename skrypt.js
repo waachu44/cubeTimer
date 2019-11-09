@@ -103,9 +103,7 @@ let stopwatch = new Stopwatch(
     document.addEventListener('keypress', function(e){
         buttonControls();
     }, false);
-    document.addEventListener('touchstart', function(e){
-        buttonControls();
-    }, false);
+    a.addEventListener('click', buttonControls, false);
     // function checkKeycode(e){
     //     var keycode;
     //     if(window.event)
