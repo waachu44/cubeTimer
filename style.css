@@ -53,7 +53,7 @@ nav a{
 main {
     padding: 25px 20px;
     margin: 20px 20px;
-    height: 350px;
+    height: 300px;
 }
 .stopwatch{
     width: 100%;
@@ -98,12 +98,11 @@ footer{
     padding: 10px 0;
 }
 footer ol{
-    margin: 10px 100px;
+    margin: 50px 100px;
     font-size: 20px;
     text-align: center;
     max-height: 200px;
     overflow: auto;
-    
 
 }
 footer ol::-webkit-scrollbar{
@@ -120,7 +119,6 @@ footer li{
     animation-duration: 1s;
     animation-fill-mode: both;
     animation-direction: alternate;
-   
 }
 @font-face{
     font-family:"manticore-regular";
