@@ -21,8 +21,7 @@ class Stopwatch {
         let times = this.times;
         let newLi = document.createElement('li');
         let msg = document.querySelector('h1').textContent;
-        let timesAfterFormat = this.format(times);
-        newLi.innerHTML = timesAfterFormat; //+'&nbsp &nbsp &nbsp'+msg;
+        newLi.innerHTML = (arrayScore.length+1)+'.&nbsp &nbsp'+this.format(times)+'&nbsp &nbsp &nbsp'+msg;
         let list = document.querySelector('ol');
         list.insertBefore(newLi, list.firstChild);
     }
@@ -94,7 +93,7 @@ let stopwatch = new Stopwatch(
     // var przycisk = document.querySelector('.button');
     // przycisk.addEventListener('keydown', function(event){
     //     switch (event.keyCode){
-    //         case 32: 
+    //         case 32:
     //         buttonControls();
     //         this.alert("spacja");
     //         break;
@@ -104,8 +103,6 @@ let stopwatch = new Stopwatch(
     document.addEventListener('keypress', function(e){
         buttonControls();
     }, false);
-    
-  
     // function checkKeycode(e){
     //     var keycode;
     //     if(window.event)
@@ -194,27 +191,59 @@ let stopwatch = new Stopwatch(
         document.querySelector('h1').textContent = msg;
     }
     var bestOl = document.querySelector('ol');
-    bestOl.addEventListener('DOMNodeInserted', bestScore, false);
+    bestOl.addEventListener('DOMNodeInserted', function(){
+        bestScore();
+        worstScore();
+        counterScore();
+        avgScore();
+    }, false);
     let arrayScore = [];
+    let arrayScoreAvg = [0, 0, 0, 0, 0, 0, 0];
+    var sum = 0;
     function bestScore(){
+        var timeToArray = stopwatch.format(stopwatch.times);
+        arrayScore.push(timeToArray);
+        arrayScore.sort();
         var best = document.querySelector('a.best');
-        var timeToString = stopwatch.format(stopwatch.times).split(':');
-        var timeString = timeToString.join('');
-        arrayScore.push(timeString);
-        let i = arrayScore.indexOf(Math.min(...arrayScore));
-        console.log(i);
+        best.classList.add('move');
+        best.innerText = 'Best: '+arrayScore[0];
+    }
+    function worstScore(){
+        var worst = document.querySelector('a.worst');
+        worst.classList.add('move');
+        worst.innerText = 'Worst: '+arrayScore[arrayScore.length-1];
+    }
+    function counterScore(){
+        var counterLength = arrayScore.length;
+        var counter = document.querySelector('a.counter');
+        counter.classList.add('move');
+        counter.innerText = 'Counter: '+counterLength;
+    }
+    function avgScore(){
+        var timeString = stopwatch.format(stopwatch.times).split(':');
+        let oneTime = timeString[0];
+        let twoTime = timeString[1];
+        let threeTime = timeString[2];
+        var timeNumber = oneTime + twoTime + threeTime;
+        sum = sum + parseInt(timeNumber);
+        //let avgSum = [...Math.ceil(sum / arrayScore.length)];
+        let avgSum = (Math.ceil(sum / arrayScore.length)).toString().split("").reverse();
+        for(i=avgSum.length; i<7; i++){
+            avgSum[i] = 0;
+        }
+        var colonSum = ':';
         
-        
-        
-        
-        
-        // var minValue = Math.min.apply(null, arrayScore);
-        // console.log(minValue)
-        // minValue = minValue.toString();
-        // var oneSubstring = minValue.substring(0,1);
-        // var twoSubstring = minValue.substring(2,3);
-        // var threeSubstring = minValue.substring(4,5);
-        // var valueSubstring = oneSubstring+':'+twoSubstring+':'+threeSubstring;
-        // best.innerText = valueSubstring;
-        // console.log(arrayScore);
+        arrayScoreAvg[5] = colonSum;
+        arrayScoreAvg[2] = colonSum;
+        arrayScoreAvg[0] = avgSum[0];
+        arrayScoreAvg[1] = avgSum[1];
+        arrayScoreAvg[3] = avgSum[2];
+        arrayScoreAvg[4] = avgSum[3];
+        arrayScoreAvg[6] = avgSum[4];
+        arrayScoreAvg[7] = avgSum[5];
+
+        var arrayScoreAvgEnd = arrayScoreAvg.reverse().join('');
+        var avg = document.querySelector('a.avg');
+        avg.classList.add('move');
+        avg.innerText = 'Average: '+arrayScoreAvgEnd;
     }
