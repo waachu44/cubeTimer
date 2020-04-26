@@ -1,3 +1,4 @@
+console.log("dupa 26.04.2020");
 class Stopwatch {
     constructor(display, results) {
         this.running = false;
